@@ -32,36 +32,6 @@ An educational website providing comprehensive information about tubulinopathies
 - **Framer Motion** - Animations
 - **Lucide React** - Icons
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd tubb
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-4. Build for production:
-```bash
-npm run build
-```
-
 ## Contributing
 
 Have something to add or notice information that needs correction? Please contact us at tubulinopathy@gmail.com
