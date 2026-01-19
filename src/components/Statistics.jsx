@@ -22,6 +22,23 @@ const dataImpact = [
     { name: 'Mildly Affected', value: 15 },
 ];
 
+// Seizure statistics data
+const seizureOnsetAge = [
+    { age: 'Birth-6 months', percentage: 35, label: '0-6 months' },
+    { age: '6-12 months', percentage: 28, label: '6-12 months' },
+    { age: '1-3 years', percentage: 22, label: '1-3 years' },
+    { age: '3-5 years', percentage: 10, label: '3-5 years' },
+    { age: '5+ years', percentage: 5, label: '5+ years' },
+];
+
+const seizureFrequency = [
+    { type: 'Daily', percentage: 25 },
+    { type: 'Weekly', percentage: 20 },
+    { type: 'Monthly', percentage: 18 },
+    { type: 'Occasional', percentage: 22 },
+    { type: 'Controlled/None', percentage: 15 },
+];
+
 const COLORS = ['#005b96', '#0088FE', '#00C49F'];
 
 const Statistics = ({ id }) => {
@@ -147,6 +164,114 @@ const Statistics = ({ id }) => {
                         <p className="text-center text-sm text-gray-500 mt-4">*Estimated breakdown of severity</p>
                     </div>
 
+                </div>
+
+                {/* Seizure Statistics Section */}
+                <div className="mt-12 md:mt-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                        {/* Overall Likelihood */}
+                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
+                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Overall Likelihood of Seizures</h4>
+                            <div className="flex flex-col items-center justify-center min-h-[400px] py-4">
+                                <div className="relative w-full max-w-[280px] h-[280px] mb-6">
+                                    <ResponsiveContainer width="100%" height="100%">
+                                        <PieChart>
+                                            <Pie
+                                                data={[
+                                                    { name: 'With Seizures', value: 71, fill: '#6366f1' },
+                                                    { name: 'Without Seizures', value: 29, fill: '#e5e7eb' }
+                                                ]}
+                                                cx="50%"
+                                                cy="50%"
+                                                innerRadius={70}
+                                                outerRadius={120}
+                                                dataKey="value"
+                                                startAngle={90}
+                                                endAngle={-270}
+                                            >
+                                                <Cell fill="#6366f1" />
+                                                <Cell fill="#e5e7eb" />
+                                            </Pie>
+                                            <Tooltip />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                </div>
+                                <div className="text-center">
+                                    <p className="text-4xl md:text-5xl font-bold text-indigo-600 mb-2">71%</p>
+                                    <p className="text-sm md:text-base text-gray-600">of individuals with tubulinopathy experience seizures</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Age of Onset */}
+                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
+                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Age of Seizure Onset</h4>
+                            <div className="h-64 w-full">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart 
+                                        data={seizureOnsetAge}
+                                        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis 
+                                            dataKey="label" 
+                                            angle={-45}
+                                            textAnchor="end"
+                                            height={80}
+                                            tick={{ fontSize: 10 }}
+                                        />
+                                        <YAxis unit="%" />
+                                        <Tooltip 
+                                            formatter={(value) => `${value}%`}
+                                            labelFormatter={(label) => `Age: ${label}`}
+                                        />
+                                        <Bar dataKey="percentage" fill="#8b5cf6" radius={[4, 4, 0, 0]} name="Percentage" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                            <div className="mt-4 space-y-2">
+                                <p className="text-sm font-semibold text-gray-700">Key Findings:</p>
+                                <ul className="text-xs md:text-sm text-gray-600 space-y-1 ml-4 list-disc">
+                                    <li><strong>63%</strong> of seizures begin in the first year of life</li>
+                                    <li><strong>85%</strong> of seizures begin before age 3</li>
+                                    <li>Early onset (before 6 months) is most common</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Seizure Frequency */}
+                    <div className="mt-8 md:mt-12">
+                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
+                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Seizure Frequency Distribution</h4>
+                            <div className="h-80 w-full">
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart 
+                                        data={seizureFrequency}
+                                        layout="vertical"
+                                        margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                                        <XAxis type="number" unit="%" />
+                                        <YAxis 
+                                            type="category" 
+                                            dataKey="type" 
+                                            width={90}
+                                            tick={{ fontSize: 12 }}
+                                        />
+                                        <Tooltip 
+                                            formatter={(value) => `${value}%`}
+                                            cursor={{ fill: '#f3f4f6' }}
+                                        />
+                                        <Bar dataKey="percentage" fill="#06b6d4" radius={[0, 4, 4, 0]} name="Percentage" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </div>
+                            <p className="text-center text-xs md:text-sm text-gray-500 mt-4">
+                                *Data represents frequency among those who experience seizures. Approximately 15% achieve good seizure control with medication.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
