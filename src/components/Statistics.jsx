@@ -76,8 +76,8 @@ const Statistics = ({ id }) => {
                                     ];
                                     return (
                                         <div key={index} className="flex flex-col items-center">
-                                            <div className="h-32 w-full">
-                                                <ResponsiveContainer width="100%" height="100%">
+                                            <div className="h-32 w-full min-w-0 min-h-[128px]">
+                                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={128}>
                                                     <PieChart>
                                                         <Pie
                                                             data={pieData}
@@ -105,8 +105,8 @@ const Statistics = ({ id }) => {
                             </div>
                         ) : (
                             /* Desktop: Bar Chart */
-                            <div className="h-[500px] w-full">
-                                <ResponsiveContainer width="100%" height="100%">
+                            <div className="h-[500px] w-full min-w-0 min-h-[500px]">
+                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={500}>
                                     <BarChart 
                                         data={dataExpressions} 
                                         layout="vertical" 
@@ -138,8 +138,8 @@ const Statistics = ({ id }) => {
                     {/* Impact/Severity Chart */}
                     <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
                         <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Severity Distribution</h3>
-                        <div className="h-80 w-full">
-                            <ResponsiveContainer width="100%" height="100%">
+                        <div className="h-80 w-full min-w-0 min-h-[320px]">
+                            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={320}>
                                 <PieChart>
                                     <Pie
                                         data={dataImpact}
@@ -173,8 +173,8 @@ const Statistics = ({ id }) => {
                         <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
                             <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Overall Likelihood of Seizures</h4>
                             <div className="flex flex-col items-center justify-center min-h-[400px] py-4">
-                                <div className="relative w-full max-w-[280px] h-[280px] mb-6">
-                                    <ResponsiveContainer width="100%" height="100%">
+                                <div className="relative w-full max-w-[280px] h-[280px] mb-6 min-w-0 min-h-[280px]">
+                                    <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={280}>
                                         <PieChart>
                                             <Pie
                                                 data={[
@@ -206,8 +206,8 @@ const Statistics = ({ id }) => {
                         {/* Age of Onset */}
                         <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
                             <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Age of Seizure Onset</h4>
-                            <div className="h-64 w-full">
-                                <ResponsiveContainer width="100%" height="100%">
+                            <div className="h-64 w-full min-w-0 min-h-[256px]">
+                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={256}>
                                     <BarChart 
                                         data={seizureOnsetAge}
                                         margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -244,8 +244,8 @@ const Statistics = ({ id }) => {
                     <div className="mt-8 md:mt-12">
                         <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
                             <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Seizure Frequency Distribution</h4>
-                            <div className="h-80 w-full">
-                                <ResponsiveContainer width="100%" height="100%">
+                            <div className="h-80 w-full min-w-0 min-h-[320px]">
+                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={320}>
                                     <BarChart 
                                         data={seizureFrequency}
                                         layout="vertical"
