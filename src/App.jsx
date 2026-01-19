@@ -8,6 +8,7 @@ import CurrentResearch from './components/CurrentResearch';
 import Support from './components/Support';
 import Contact from './components/Contact';
 import Sources from './components/Sources';
+import AdBanner from './components/AdBanner';
 
 function App() {
   return (
@@ -33,13 +34,41 @@ function App() {
 
       <main className="pt-16">
         <Hero id="home" />
+        
+        {/* Ad placement after hero */}
+        <AdBanner 
+          adSlot="YOUR_AD_SLOT_ID_1" 
+          className="bg-gray-50 py-4"
+        />
+        
         <CausesInheritance id="causes" />
+        
+        {/* Ad placement between sections */}
+        <AdBanner 
+          adSlot="YOUR_AD_SLOT_ID_2" 
+          className="bg-white py-4"
+        />
+        
         <Variants id="variants" />
         <Expressions id="expressions" />
+        
+        {/* Ad placement between sections */}
+        <AdBanner 
+          adSlot="YOUR_AD_SLOT_ID_3" 
+          className="bg-gray-50 py-4"
+        />
+        
         <Diagnosis id="diagnosis" />
         <Statistics id="statistics" />
         <Support id="support" />
         <CurrentResearch id="research" />
+        
+        {/* Ad placement before footer */}
+        <AdBanner 
+          adSlot="YOUR_AD_SLOT_ID_4" 
+          className="bg-gray-50 py-4"
+        />
+        
         <Contact id="contact" />
         <Sources id="sources" />
       </main>
