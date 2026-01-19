@@ -31,14 +31,6 @@ const seizureOnsetAge = [
     { age: '5+ years', percentage: 5, label: '5+ years' },
 ];
 
-const seizureFrequency = [
-    { type: 'Daily', percentage: 25 },
-    { type: 'Weekly', percentage: 20 },
-    { type: 'Monthly', percentage: 18 },
-    { type: 'Occasional', percentage: 22 },
-    { type: 'Controlled/None', percentage: 15 },
-];
-
 const COLORS = ['#005b96', '#0088FE', '#00C49F'];
 
 const Statistics = ({ id }) => {
@@ -240,38 +232,6 @@ const Statistics = ({ id }) => {
                         </div>
                     </div>
 
-                    {/* Seizure Frequency */}
-                    <div className="mt-8 md:mt-12">
-                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
-                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Seizure Frequency Distribution</h4>
-                            <div className="h-80 w-full min-w-0 min-h-[320px]">
-                                <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={320}>
-                                    <BarChart 
-                                        data={seizureFrequency}
-                                        layout="vertical"
-                                        margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
-                                    >
-                                        <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
-                                        <XAxis type="number" unit="%" />
-                                        <YAxis 
-                                            type="category" 
-                                            dataKey="type" 
-                                            width={90}
-                                            tick={{ fontSize: 12 }}
-                                        />
-                                        <Tooltip 
-                                            formatter={(value) => `${value}%`}
-                                            cursor={{ fill: '#f3f4f6' }}
-                                        />
-                                        <Bar dataKey="percentage" fill="#06b6d4" radius={[0, 4, 4, 0]} name="Percentage" />
-                                    </BarChart>
-                                </ResponsiveContainer>
-                            </div>
-                            <p className="text-center text-xs md:text-sm text-gray-500 mt-4">
-                                *Data represents frequency among those who experience seizures. Approximately 15% achieve good seizure control with medication.
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

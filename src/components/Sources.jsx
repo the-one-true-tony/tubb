@@ -73,6 +73,16 @@ const Sources = ({ id }) => {
                         <p className="text-gray-400 text-sm">Study on broader effects of tubulin mutations beyond the brain, including eye, ear, and kidney involvement.</p>
                     </div>
                     <div className="p-3 md:p-4 border border-gray-700 rounded-lg hover:border-blue-500 transition-colors">
+                        <h4 className="text-base md:text-xl font-semibold text-white mb-2">Seizure Statistics & Epilepsy in Tubulinopathies</h4>
+                        <a href="https://pubmed.ncbi.nlm.nih.gov/24860126/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mb-2">
+                            Wide spectrum of tubulinopathies: A study of 40 patients
+                        </a>
+                        <a href="https://pubmed.ncbi.nlm.nih.gov/33082561/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mb-2">
+                            Natural history and quantitative analysis (2020)
+                        </a>
+                        <p className="text-gray-400 text-sm">Studies reporting seizure prevalence (~71% of individuals), age of onset patterns, and epilepsy characteristics in tubulinopathy cohorts. Most seizures begin in infancy or early childhood.</p>
+                    </div>
+                    <div className="p-3 md:p-4 border border-gray-700 rounded-lg hover:border-blue-500 transition-colors">
                         <h4 className="text-base md:text-xl font-semibold text-white mb-2">Biobanks and Resources</h4>
                         <a href="https://www.tubulinbiobank.org/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline block mb-2">
                             Tubulin Biobank
