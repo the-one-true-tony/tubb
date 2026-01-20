@@ -25,12 +25,46 @@ An educational website providing comprehensive information about tubulinopathies
 
 ## Technology Stack
 
+- **Next.js** - Full-stack React framework with API routes
 - **React** - UI framework
-- **Vite** - Build tool
 - **Tailwind CSS** - Styling
 - **Recharts** - Data visualization
 - **Framer Motion** - Animations
 - **Lucide React** - Icons
+
+## Getting Started
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the site.
+
+### Build
+
+```bash
+npm run build
+npm start
+```
+
+## API Routes
+
+This project includes Next.js API routes for backend functionality:
+
+- `/api/hello` - Test endpoint
+- `/api/contact` - Contact form submission handler
+- `/api/statistics` - Statistical data endpoint
+- `/api/variants` - Variant data endpoint (supports optional `?gene=` query parameter)
+
+See [README_API.md](./README_API.md) for detailed API documentation.
 
 ## Contributing
 
