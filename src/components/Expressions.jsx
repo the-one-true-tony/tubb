@@ -27,7 +27,7 @@ const Expressions = ({ id }) => {
         {
             icon: Accessibility,
             title: "Motor Impairments",
-            description: "Challenges with mobilization, including delayed walking, ataxia, or muscle weakness, often necessitating physical therapy."
+            description: " Challenges with mobilization, including delayed walking, ataxia, or muscle weakness, often require physical therapy."
         },
         {
             icon: Brain,

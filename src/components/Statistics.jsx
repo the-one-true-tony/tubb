@@ -56,7 +56,7 @@ const Statistics = ({ id }) => {
 
                     {/* Expression Frequency Chart */}
                     <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg overflow-hidden">
-                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Frequency of Expressions</h3>
+                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Frequency of Expressions*</h3>
                         
                         {/* Mobile: Pie Charts Grid */}
                         {isMobile ? (
@@ -226,7 +226,6 @@ const Statistics = ({ id }) => {
                                 <ul className="text-xs md:text-sm text-gray-600 space-y-1 ml-4 list-disc">
                                     <li><strong>63%</strong> of seizures begin in the first year of life</li>
                                     <li><strong>85%</strong> of seizures begin before age 3</li>
-                                    <li>Early onset (before 6 months) is most common</li>
                                 </ul>
                             </div>
                         </div>
