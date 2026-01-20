@@ -129,12 +129,12 @@ All configuration files are properly set up for Cloudflare Pages deployment.
 
 ### What OpenNext Does:
 
-1. **Transforms `.next/` output** for Cloudflare Workers
+1. **Transforms `.next/` output** for Cloudflare Workers/Pages
 2. **Generates `.open-next/` directory** with:
-   - `worker.js` - Main Cloudflare Worker file
    - Transformed API routes
    - SSR handlers
    - Static assets
+   - Worker files for Cloudflare runtime
 3. **Provides Node.js polyfills** for compatibility
 4. **Optimizes for Cloudflare** runtime
 
