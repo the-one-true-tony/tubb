@@ -1,6 +1,9 @@
 import { defineCloudflareConfig } from '@opennextjs/cloudflare';
 
 export default defineCloudflareConfig({
-  // Default configuration for Cloudflare Pages
-  // OpenNext will handle Next.js 15 transformation automatically
+  // This ensures the worker handles the main request and 
+  // falls back to static assets only when needed.
+  default: {
+    runtime: "cloudflare-nodejs",
+  }
 });
