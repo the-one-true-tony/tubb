@@ -11,10 +11,12 @@ Or leave it on **"None"** - Cloudflare will auto-detect Next.js from your `packa
 
 ### Build Command
 ```
-npm run build
+npm run build && npx opennextjs-cloudflare build --skipNextBuild
 ```
 
-**Note**: The build script automatically removes `.next/cache` after building to prevent Cloudflare from trying to upload large cache files (>25 MiB limit).
+**Note**: 
+- The `build` script runs Next.js build and removes `.next/cache` to prevent Cloudflare from trying to upload large cache files (>25 MiB limit)
+- OpenNext is run separately with `--skipNextBuild` to avoid a build loop (OpenNext would otherwise call `npm run build` again)
 
 ### Build Output Directory
 **Set to**: `.open-next`
@@ -35,7 +37,7 @@ npm run build
 | Setting | Value |
 |---------|-------|
 | Framework preset | `Next.js` |
-| Build command | `npm run build` |
+| Build command | `npm run build && npx opennextjs-cloudflare build --skipNextBuild` |
 | Build output directory | `.open-next` |
 | Root directory | `/` (default) |
 | Node version | `25` |

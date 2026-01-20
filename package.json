@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf .next/cache && npx opennextjs-cloudflare build",
+    "build": "next build && rm -rf .next/cache",
+    "build:cloudflare": "npm run build && npx opennextjs-cloudflare build --skipNextBuild",
     "preview": "npx wrangler dev",
     "start": "next start",
     "lint": "next lint"
@@ -29,6 +30,8 @@
     "eslint": "^9.39.1",
     "eslint-config-next": "^15.1.6",
     "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
     "typescript": "^5.0.0",
     "wrangler": "^4.59.2"
   }
