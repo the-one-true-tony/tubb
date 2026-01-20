@@ -21,7 +21,24 @@ npm install @opennextjs/cloudflare@latest
 
 ## Configuration Files
 
-### 1. `wrangler.jsonc`
+### 1. `open-next.config.ts`
+
+Created in project root:
+```typescript
+import { defineCloudflareConfig } from '@opennextjs/cloudflare';
+
+export default defineCloudflareConfig({
+  // Default configuration for Cloudflare Pages
+  // OpenNext will handle Next.js 15 transformation automatically
+});
+```
+
+**Purpose:**
+- Required by OpenNext to run non-interactively in CI/CD
+- Prevents the build from prompting for configuration
+- Uses default settings optimized for Cloudflare Pages
+
+### 2. `wrangler.jsonc`
 
 Created in project root:
 ```jsonc
