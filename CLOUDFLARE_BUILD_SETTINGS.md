@@ -14,6 +14,8 @@ Or leave it on **"None"** - Cloudflare will auto-detect Next.js from your `packa
 npm run build
 ```
 
+**Note**: The build script automatically removes `.next/cache` after building to prevent Cloudflare from trying to upload large cache files (>25 MiB limit).
+
 ### Build Output Directory
 **Leave EMPTY** (blank)
 

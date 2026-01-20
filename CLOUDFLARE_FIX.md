@@ -8,13 +8,22 @@ The **Build output directory** is set to `.next` or the framework preset isn't p
 
 ## Solution
 
-### In Cloudflare Dashboard:
+### Step 1: Update Build Script (Already Done)
+
+The `package.json` build script now removes cache after build:
+```json
+"build": "next build && rm -rf .next/cache"
+```
+
+This prevents Cloudflare from trying to upload large cache files.
+
+### Step 2: Configure Cloudflare Dashboard
 
 1. Go to **Workers & Pages → Your Project → Settings → Builds & deployments**
 
 2. **Verify these settings:**
    - **Framework preset**: `Next.js` (must be explicitly set, not "None")
-   - **Build command**: `npm run build`
+   - **Build command**: `npm run build` (this now removes cache automatically)
    - **Build output directory**: **MUST BE EMPTY/BLANK** (delete any value if set)
    - **Node version**: `25`
 
