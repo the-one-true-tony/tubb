@@ -15,8 +15,7 @@ This project can be deployed to both Cloudflare Pages and GitHub Pages, but with
 - ✅ Free tier available
 
 **Configuration**: Already set up
-- `wrangler.toml` - Cloudflare configuration
-- `.cloudflare/pages.json` - Build settings
+- `.cloudflare/pages.json` - Build settings (optional)
 - `next.config.js` - Optimized for Cloudflare
 
 **Deploy**: See `CLOUDFLARE_DEPLOYMENT.md`

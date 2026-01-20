@@ -25,7 +25,7 @@ This guide will help you deploy your Next.js application to Cloudflare Pages.
    - **Build command**: `npm run build`
    - **Build output directory**: Leave **EMPTY** (Cloudflare handles Next.js automatically)
    - **Root directory**: `/` (leave as default)
-   - **Node version**: `25` (or `20` minimum - Cloudflare Pages/Wrangler requires Node 20+)
+   - **Node version**: `25` (or `20` minimum - Cloudflare Pages requires Node 20+)
    
    **Important**: For Next.js, don't manually set the output directory. Cloudflare Pages detects and handles it automatically.
 
@@ -37,27 +37,13 @@ This guide will help you deploy your Next.js application to Cloudflare Pages.
    - Click **Save and Deploy**
    - Cloudflare will build and deploy your site automatically
 
-### Option 2: Deploy via Wrangler CLI
+### Option 2: Deploy via Cloudflare Dashboard (Recommended)
 
-1. **Install Wrangler CLI**
-   ```bash
-   npm install -g wrangler
-   ```
-
-2. **Login to Cloudflare**
-   ```bash
-   wrangler login
-   ```
-
-3. **Deploy**
-   ```bash
-   wrangler pages deploy .next --project-name=tubb
-   ```
+The Cloudflare Dashboard is the easiest way to deploy. Just connect your GitHub repository and Cloudflare will automatically build and deploy on every push to `main`.
 
 ## Configuration Files
 
-- **`wrangler.toml`**: Cloudflare Workers/Pages configuration
-- **`.cloudflare/pages.json`**: Pages-specific build configuration
+- **`.cloudflare/pages.json`**: Pages-specific build configuration (optional)
 - **`next.config.js`**: Updated for Cloudflare Pages compatibility
 
 ## API Routes
@@ -92,7 +78,7 @@ Cloudflare Pages automatically deploys:
 - **Framework**: Next.js
 - **Build command**: `npm run build`
 - **Output directory**: Leave **EMPTY** (auto-detected for Next.js)
-- **Node version**: 25 (or 20 minimum - required for Cloudflare Pages/Wrangler)
+- **Node version**: 25 (or 20 minimum - required for Cloudflare Pages)
 
 ## Troubleshooting Auto-Deploy
 

@@ -6,16 +6,12 @@ This document outlines the changes made to migrate the application from GitHub P
 
 ### Configuration Files Created
 
-1. **`wrangler.toml`** - Cloudflare Workers/Pages configuration file
-   - Used for Cloudflare CLI deployments
-   - Contains project metadata and compatibility settings
-
-2. **`.cloudflare/pages.json`** - Cloudflare Pages build configuration
+1. **`.cloudflare/pages.json`** - Cloudflare Pages build configuration (optional)
    - Specifies build command and output directory
    - Sets framework to Next.js
 
-3. **`.nvmrc`** - Node version specification
-   - Ensures consistent Node.js version (18) across environments
+2. **`.nvmrc`** - Node version specification
+   - Ensures consistent Node.js version (25) across environments
 
 ### Configuration Files Updated
 
@@ -25,7 +21,7 @@ This document outlines the changes made to migrate the application from GitHub P
    - Removed `standalone` output (not needed for Cloudflare Pages)
 
 2. **`.gitignore`**
-   - Added Cloudflare-specific ignores (`.wrangler/`, `wrangler.toml.local`)
+   - Added Cloudflare-specific ignores (`.wrangler/`)
 
 3. **`README.md`**
    - Updated technology stack (JSS instead of Tailwind CSS)

@@ -20,7 +20,7 @@ In Cloudflare Dashboard → Your Project → **Settings** → **Builds & deploym
 - **Build command**: `npm run build`
 - **Build output directory**: Leave **EMPTY** or use `.next` (Cloudflare handles Next.js automatically)
 - **Root directory**: `/` (leave as default)
-- **Node version**: `25` (or `20` minimum - Cloudflare Pages/Wrangler requires Node 20+)
+- **Node version**: `25` (or `20` minimum - Cloudflare Pages requires Node 20+)
 
 **Important**: For Next.js, Cloudflare Pages handles the output directory automatically. Don't manually set it unless you're doing a static export.
 

@@ -30,4 +30,3 @@ build
 
 # Cloudflare
 .wrangler/
-wrangler.toml.local
