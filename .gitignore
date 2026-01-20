@@ -19,7 +19,8 @@ out/
 build
 
 # OpenNext
-.open-next/
+.open-next/*
+!.open-next/.gitkeep
 
 # Editor directories and files
 .vscode/*
