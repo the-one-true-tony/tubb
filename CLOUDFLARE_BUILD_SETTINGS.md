@@ -17,13 +17,12 @@ npm run build
 **Note**: The build script automatically removes `.next/cache` after building to prevent Cloudflare from trying to upload large cache files (>25 MiB limit).
 
 ### Build Output Directory
-**Leave EMPTY** (blank)
+**Set to**: `.open-next`
 
-⚠️ **Critical**: 
-- Do NOT set this to `.next` or any other value
-- Cloudflare Pages uses its own Next.js runtime - it doesn't upload `.next` as static files
-- Setting it manually will cause errors like "Pages only supports files up to 25 MiB" because `.next/cache` files are too large
-- Cloudflare automatically handles Next.js builds when framework is set to "Next.js"
+⚠️ **Important**: 
+- OpenNext adapter generates output in `.open-next/` directory
+- This is required for Next.js 15 full-stack support (SSR + API routes)
+- The build script automatically runs OpenNext after Next.js build
 
 ### Root Directory
 **Leave as default**: `/` (or blank)
@@ -37,23 +36,24 @@ npm run build
 |---------|-------|
 | Framework preset | `Next.js` |
 | Build command | `npm run build` |
-| Build output directory | **EMPTY** (leave blank) |
+| Build output directory | `.open-next` |
 | Root directory | `/` (default) |
 | Node version | `25` |
+| Compatibility flags | `nodejs_compat` (configured in `wrangler.jsonc`, may need manual entry in Dashboard) |
 
-## Why Leave Output Directory Empty?
+## Why Use OpenNext?
 
-Cloudflare Pages has native Next.js support. When it detects Next.js:
-- It automatically knows where the build output is
-- It handles both static and dynamic routes
-- It sets up API routes correctly
-- Manual output directory can interfere with this
+For Next.js 15, Cloudflare recommends using the OpenNext adapter:
+- **Full Next.js 15 Support**: App Router, SSR, API routes, ISR, PPR
+- **Node.js Runtime**: Uses Node.js runtime (not Edge) for better compatibility
+- **Better Performance**: Optimized for Cloudflare Workers
+- **Future-Proof**: Official recommended approach for Next.js 15+
 
-Setting the output directory manually can cause:
-- Build failures
-- Missing API routes
-- Incorrect routing
-- Deployment errors
+The OpenNext adapter:
+- Transforms Next.js build output for Cloudflare Workers
+- Handles API routes and SSR correctly
+- Provides Node.js API polyfills
+- Integrates with Cloudflare Images for `next/image`
 
 ## Verification
 

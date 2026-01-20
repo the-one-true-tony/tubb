@@ -36,15 +36,16 @@ All configuration files are properly set up for Cloudflare Pages deployment.
     "command": "npm run build"
   },
   "framework": "nextjs",
-  "nodeVersion": "25"
+  "nodeVersion": "25",
+  "buildOutputDir": ".open-next"
 }
 ```
 
 **Key Points**:
 - ✅ Framework set to `nextjs`
 - ✅ Node version set to `25`
-- ✅ **No `buildOutputDir`** - This is CORRECT! Must be empty/omitted
-- ✅ Build command is `npm run build`
+- ✅ Build output directory set to `.open-next` (OpenNext adapter output)
+- ✅ Build command is `npm run build` (includes OpenNext transform)
 
 ### 3. `package.json` ✅
 
@@ -53,14 +54,16 @@ All configuration files are properly set up for Cloudflare Pages deployment.
 ```json
 {
   "scripts": {
-    "build": "next build && rm -rf .next/cache"
+    "build": "next build && npx opennextjs-cloudflare build",
+    "preview": "npx wrangler dev"
   }
 }
 ```
 
 **Key Points**:
-- ✅ Build script removes `.next/cache` after build
-- ✅ This prevents Cloudflare from trying to upload large cache files (>25 MiB limit)
+- ✅ Build script runs Next.js build, then OpenNext transform
+- ✅ OpenNext adapter transforms output for Cloudflare Workers
+- ✅ Preview script allows local testing with Cloudflare runtime
 
 ### 4. `public/_routes.json` ✅
 
@@ -93,7 +96,7 @@ All configuration files are properly set up for Cloudflare Pages deployment.
 |---------|-------|--------|
 | **Framework preset** | `Next.js` | ⚠️ **VERIFY IN DASHBOARD** |
 | **Build command** | `npm run build` | ✅ Correct |
-| **Build output directory** | **EMPTY** (blank) | ⚠️ **VERIFY IN DASHBOARD** |
+| **Build output directory** | `.open-next` | ⚠️ **VERIFY IN DASHBOARD** |
 | **Root directory** | `/` (default) | ✅ Correct |
 | **Node version** | `25` | ✅ Correct |
 
@@ -104,8 +107,9 @@ All configuration files are properly set up for Cloudflare Pages deployment.
 1. Go to **Workers & Pages → Your Project → Settings → Builds & deployments**
 
 2. Check:
-   - **Framework preset**: Must be `Next.js` (not "None")
-   - **Build output directory**: Must be **EMPTY/BLANK** (delete any value if set)
+   - **Framework preset**: Must be `Next.js` (not "None", not "Static HTML Export")
+   - **Build output directory**: Must be `.open-next`
+   - **Compatibility flags**: Enable `nodejs_compat` in Functions settings
 
 3. If not correct:
    - Change Framework preset to `Next.js`
@@ -123,30 +127,45 @@ All configuration files are properly set up for Cloudflare Pages deployment.
   - Server-side code
   - API route handlers
 
+### What OpenNext Does:
+
+1. **Transforms `.next/` output** for Cloudflare Workers
+2. **Generates `.open-next/` directory** with:
+   - `worker.js` - Main Cloudflare Worker file
+   - Transformed API routes
+   - SSR handlers
+   - Static assets
+3. **Provides Node.js polyfills** for compatibility
+4. **Optimizes for Cloudflare** runtime
+
 ### What Cloudflare Pages Does:
 
 1. **Detects Next.js** from framework preset
-2. **Reads `.next/` directory** automatically
-3. **Sets up Edge Runtime** for API routes
+2. **Reads `.open-next/` directory** (OpenNext output)
+3. **Deploys Worker** with Node.js compatibility
 4. **Serves static assets** from `/_next/static/`
-5. **Handles SSR** for dynamic routes
+5. **Handles SSR and API routes** via Worker
 
 ### What Gets Uploaded:
 
-- ✅ Static assets (HTML, CSS, JS chunks)
-- ✅ API route handlers (Edge Runtime)
+- ✅ `.open-next/` directory (OpenNext transformed output)
+- ✅ Worker file (`worker.js`)
+- ✅ Static assets
 - ❌ `.next/cache/` (removed by build script)
 - ❌ Source files (not needed)
 
 ## Verification Checklist
 
 - [x] `next.config.js` has no `output: 'export'`
-- [x] `.cloudflare/pages.json` has no `buildOutputDir`
-- [x] `package.json` build script removes cache
+- [x] `@opennextjs/cloudflare` installed
+- [x] `wrangler.jsonc` configured with `nodejs_compat`
+- [x] `.cloudflare/pages.json` has `buildOutputDir: ".open-next"`
+- [x] `package.json` build script uses OpenNext
 - [x] `public/_routes.json` configured
 - [x] `public/_headers` configured
 - [ ] **Framework preset set to `Next.js` in Cloudflare Dashboard** ⚠️
-- [ ] **Build output directory is EMPTY in Cloudflare Dashboard** ⚠️
+- [ ] **Build output directory is `.open-next` in Cloudflare Dashboard** ⚠️
+- [x] **`nodejs_compat` flag configured in `wrangler.jsonc`** ✅
 
 ## Common Issues
 

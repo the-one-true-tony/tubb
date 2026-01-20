@@ -15,9 +15,9 @@ After successful build, the site shows 404 errors on Cloudflare Pages.
 ### 2. Build Output Directory Misconfigured
 
 **In Cloudflare Dashboard:**
-- **Build output directory** MUST be **EMPTY/BLANK**
-- Do NOT set it to `.next` or any other value
-- Cloudflare Pages handles Next.js output automatically
+- **Build output directory** MUST be set to `.open-next`
+- This is the output directory from the OpenNext adapter
+- OpenNext transforms Next.js build for Cloudflare Workers
 
 ### 3. Routes Configuration
 
@@ -72,8 +72,8 @@ Ensure these compatibility flags are enabled in Cloudflare Dashboard:
    - Save the settings
 
 3. **Verify Build output directory:**
-   - It MUST be EMPTY/BLANK
-   - If it has any value (like `.next`), DELETE IT
+   - It MUST be set to `.open-next`
+   - This is the OpenNext adapter output directory
    - Save the settings
 
 4. **After changing settings:**
@@ -88,8 +88,9 @@ Ensure these compatibility flags are enabled in Cloudflare Dashboard:
 2. Create a new project
 3. Connect your GitHub repository
 4. **IMPORTANT:** Set Framework preset to `Next.js` BEFORE first build
-5. Leave Build output directory EMPTY
+5. Set Build output directory to `.open-next`
 6. Set Node version to `25`
+7. Enable `nodejs_compat` compatibility flag in Functions settings
 
 ### Option 2: Check Build Output
 Run locally to verify build works:
@@ -110,7 +111,9 @@ Look for specific errors in the deployment logs:
 
 - ✅ Framework preset: `Next.js`
 - ✅ Build command: `npm run build`
-- ✅ Build output directory: EMPTY
+- ✅ Build output directory: `.open-next`
+- ✅ OpenNext adapter configured
+- ✅ `nodejs_compat` flag enabled
 - ✅ Node version: `25`
 - ✅ `_routes.json` configured
 - ✅ `_headers` configured for MIME types

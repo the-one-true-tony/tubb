@@ -3,5 +3,6 @@
     "command": "npm run build"
   },
   "framework": "nextjs",
-  "nodeVersion": "25"
+  "nodeVersion": "25",
+  "buildOutputDir": ".open-next"
 }

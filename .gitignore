@@ -18,6 +18,9 @@ dist-ssr
 out/
 build
 
+# OpenNext
+.open-next/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
