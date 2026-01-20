@@ -43,17 +43,17 @@ export default defineCloudflareConfig({
 Created in project root:
 ```jsonc
 {
-  "main": ".open-next/worker.js",
-  "compatibility_date": "2024-12-30",
-  "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": ".open-next"
+  "name": "tubb",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"]
 }
 ```
 
 **Key settings:**
-- `main`: Points to the OpenNext-generated worker file
+- `name`: Project name for Cloudflare Pages
 - `compatibility_flags`: Includes `nodejs_compat` for Node.js API support
-- `pages_build_output_dir`: Output directory for Cloudflare Pages
+
+⚠️ **Important**: Do NOT include `pages_build_output_dir` in `wrangler.jsonc`. Cloudflare Pages validates this directory exists BEFORE running the build, but the directory is created BY the build. Set the build output directory only in the Cloudflare Pages dashboard settings.
 
 ### 2. `package.json` Build Script
 
