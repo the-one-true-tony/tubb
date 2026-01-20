@@ -2,6 +2,7 @@
   "name": "tubb",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build && rm -rf .next/cache",
@@ -22,6 +23,7 @@
     "recharts": "^3.6.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.39.1",
     "@opennextjs/cloudflare": "^1.0.0",
     "@types/node": "^22.10.5",

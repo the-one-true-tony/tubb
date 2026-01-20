@@ -1,7 +1,7 @@
 // Example statistics API route - GET /api/statistics
 // This could fetch dynamic statistics from a database
 
-export async function GET(request) {
+export async function GET(_request) {
   // In a real application, you would fetch this from a database
   const statistics = {
     prevalence: {
