@@ -1,4 +1,10 @@
-name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Static Export)
+
+# NOTE: This workflow requires static export configuration
+# To enable GitHub Pages deployment:
+# 1. Uncomment `output: 'export'` in next.config.js
+# 2. This will disable API routes (GitHub Pages only supports static sites)
+# 3. Consider using Cloudflare Pages instead for full Next.js support
 
 on:
   push:
@@ -31,8 +37,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
-      - name: Build
+      - name: Build (Static Export)
         run: npm run build
+        # Note: Requires output: 'export' in next.config.js
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -40,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './out'  # Next.js static export outputs to 'out' directory
 
   deploy:
     environment:

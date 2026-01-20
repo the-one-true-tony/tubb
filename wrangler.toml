@@ -1,0 +1,15 @@
+# Cloudflare Pages/Workers configuration
+# This file is used for Cloudflare deployment
+
+name = "tubb"
+compatibility_date = "2024-01-01"
+
+# Note: For Cloudflare Pages, most configuration is done in the dashboard
+# This file is mainly for reference and CLI usage
+
+# Pages configuration (if using wrangler CLI)
+# pages_build_output_dir = ".next"
+
+# Environment variables (set these in Cloudflare dashboard instead)
+# [vars]
+# EXAMPLE_VAR = "value"

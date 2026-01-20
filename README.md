@@ -27,7 +27,7 @@ An educational website providing comprehensive information about tubulinopathies
 
 - **Next.js** - Full-stack React framework with API routes
 - **React** - UI framework
-- **Tailwind CSS** - Styling
+- **JSS (JavaScript Style Sheets)** - Styling
 - **Recharts** - Data visualization
 - **Framer Motion** - Animations
 - **Lucide React** - Icons
@@ -65,6 +65,24 @@ This project includes Next.js API routes for backend functionality:
 - `/api/variants` - Variant data endpoint (supports optional `?gene=` query parameter)
 
 See [README_API.md](./README_API.md) for detailed API documentation.
+
+## Deployment
+
+This project is deployed on **Cloudflare Pages**, which provides:
+- Fast global CDN
+- Automatic HTTPS
+- Serverless API routes (Edge Runtime)
+- Preview deployments for pull requests
+- Zero-configuration deployment
+
+See [CLOUDFLARE_DEPLOYMENT.md](./CLOUDFLARE_DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Deploy
+
+1. Connect your repository to Cloudflare Pages
+2. Set build command: `npm run build`
+3. Set output directory: `.next`
+4. Deploy!
 
 ## Contributing
 

@@ -1,0 +1,9 @@
+{
+  "build": {
+    "command": "npm run build",
+    "outputDirectory": ".next"
+  },
+  "framework": "nextjs",
+  "nodeVersion": "18",
+  "rootDirectory": "/"
+}
