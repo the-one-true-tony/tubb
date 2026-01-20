@@ -23,9 +23,11 @@ This guide will help you deploy your Next.js application to Cloudflare Pages.
 3. **Configure Build Settings**
    - **Framework preset**: `Next.js` (Cloudflare will auto-detect)
    - **Build command**: `npm run build`
-   - **Build output directory**: `.next`
+   - **Build output directory**: Leave **EMPTY** (Cloudflare handles Next.js automatically)
    - **Root directory**: `/` (leave as default)
-   - **Node version**: `18` or `20`
+   - **Node version**: `25` (or `20` minimum - Cloudflare Pages/Wrangler requires Node 20+)
+   
+   **Important**: For Next.js, don't manually set the output directory. Cloudflare Pages detects and handles it automatically.
 
 4. **Environment Variables** (if needed)
    - Add any environment variables in the dashboard
@@ -89,8 +91,12 @@ Cloudflare Pages automatically deploys:
 
 - **Framework**: Next.js
 - **Build command**: `npm run build`
-- **Output directory**: `.next`
-- **Node version**: 18 or 20
+- **Output directory**: Leave **EMPTY** (auto-detected for Next.js)
+- **Node version**: 25 (or 20 minimum - required for Cloudflare Pages/Wrangler)
+
+## Troubleshooting Auto-Deploy
+
+If deployments aren't triggering automatically, see [CLOUDFLARE_TROUBLESHOOTING.md](./CLOUDFLARE_TROUBLESHOOTING.md) for detailed steps.
 
 ## Troubleshooting
 
