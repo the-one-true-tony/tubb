@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react';
+import { useAdBannerStyles } from '../styles/adBannerStyles';
+import clsx from 'clsx';
 
 const AdBanner = ({ 
   adSlot, 
@@ -11,6 +13,7 @@ const AdBanner = ({
   publisherId = 'ca-pub-1038698166930039'
 }) => {
   const adRef = useRef(null);
+  const classes = useAdBannerStyles();
 
   useEffect(() => {
     try {
@@ -42,12 +45,17 @@ const AdBanner = ({
     return null;
   }
 
+  const containerClass = className.includes('bg-gray-50') 
+    ? classes.containerGray 
+    : className.includes('bg-white') 
+    ? classes.containerWhite 
+    : classes.container;
+
   return (
-    <div className={`ad-container flex justify-center my-4 ${className}`} style={style}>
+    <div className={clsx(containerClass, className)} style={style}>
       <ins
         ref={adRef}
-        className="adsbygoogle"
-        style={{ display: 'block', minHeight: '100px' }}
+        className={clsx('adsbygoogle', classes.ad)}
         data-ad-client={publisherId}
         data-ad-slot={adSlot}
         data-ad-format={adFormat}

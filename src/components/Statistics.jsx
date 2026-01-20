@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { useStatisticsStyles } from '../styles/statisticsStyles';
 
 const dataExpressions = [
     { name: 'Cortical Malformations', value: 99 },
@@ -36,6 +37,7 @@ const seizureOnsetAge = [
 const COLORS = ['#005b96', '#0088FE', '#00C49F'];
 
 const Statistics = ({ id }) => {
+    const classes = useStatisticsStyles();
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -50,27 +52,27 @@ const Statistics = ({ id }) => {
     }, []);
 
     return (
-        <section id={id} className="py-12 md:py-20 px-4 md:px-6 bg-gray-50">
-            <div className="max-w-6xl mx-auto">
-                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-8 md:mb-12 text-center">Statistical Breakdown</h2>
+        <section id={id} className={classes.section}>
+            <div className={classes.container}>
+                <h2 className={classes.title}>Statistical Breakdown</h2>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div className={classes.grid}>
 
                     {/* Expression Frequency Chart */}
-                    <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg overflow-hidden">
-                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Frequency of Expressions*</h3>
+                    <div className={classes.chartCard}>
+                        <h3 className={classes.chartTitle}>Frequency of Expressions*</h3>
                         
                         {/* Mobile: Pie Charts Grid */}
                         {isMobile ? (
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className={classes.mobileGrid}>
                                 {dataExpressions.map((item, index) => {
                                     const pieData = [
                                         { name: 'Affected', value: item.value, fill: '#005b96' },
                                         { name: 'Not Affected', value: 100 - item.value, fill: '#e5e7eb' }
                                     ];
                                     return (
-                                        <div key={index} className="flex flex-col items-center">
-                                            <div className="h-32 w-full min-w-0 min-h-[128px]">
+                                        <div key={index} className={classes.mobileChartItem}>
+                                            <div className={classes.chartContainer}>
                                                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={128}>
                                                     <PieChart>
                                                         <Pie
@@ -91,15 +93,15 @@ const Statistics = ({ id }) => {
                                                     </PieChart>
                                                 </ResponsiveContainer>
                                             </div>
-                                            <p className="text-xs font-semibold text-gray-900 mt-2 text-center leading-tight">{item.name}</p>
-                                            <p className="text-sm font-bold text-medical-blue mt-1">{item.value}%</p>
+                                            <p className={classes.itemName}>{item.name}</p>
+                                            <p className={classes.itemValue}>{item.value}%</p>
                                         </div>
                                     );
                                 })}
                             </div>
                         ) : (
                             /* Desktop: Bar Chart */
-                            <div className="h-[500px] w-full min-w-0 min-h-[500px]">
+                            <div className={classes.chartContainerLarge}>
                                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={500}>
                                     <BarChart 
                                         data={dataExpressions} 
@@ -126,13 +128,13 @@ const Statistics = ({ id }) => {
                             </div>
                         )}
                         
-                        <p className="text-center text-xs md:text-sm text-gray-500 mt-4">*Illustrative data based on general observation</p>
+                        <p className={classes.note}>*Illustrative data based on general observation</p>
                     </div>
 
                     {/* Impact/Severity Chart */}
-                    <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
-                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Severity Distribution</h3>
-                        <div className="h-80 w-full min-w-0 min-h-[320px]">
+                    <div className={classes.chartCard}>
+                        <h3 className={classes.chartTitle}>Severity Distribution</h3>
+                        <div className={classes.chartContainerMedium}>
                             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={320}>
                                 <PieChart>
                                     <Pie
@@ -155,19 +157,19 @@ const Statistics = ({ id }) => {
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
-                        <p className="text-center text-sm text-gray-500 mt-4">*Estimated breakdown of severity</p>
+                        <p className={classes.note}>*Estimated breakdown of severity</p>
                     </div>
 
                 </div>
 
                 {/* Seizure Statistics Section */}
-                <div className="mt-12 md:mt-16">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                <div className={classes.seizureSection}>
+                    <div className={classes.seizureGrid}>
                         {/* Overall Likelihood */}
-                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
-                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Overall Likelihood of Seizures</h4>
-                            <div className="flex flex-col items-center justify-center min-h-[400px] py-4">
-                                <div className="relative w-full max-w-[280px] h-[280px] mb-6 min-w-0 min-h-[280px]">
+                        <div className={classes.chartCard}>
+                            <h4 className={classes.chartTitle}>Overall Likelihood of Seizures</h4>
+                            <div className={classes.centerContent}>
+                                <div className={classes.chartContainerPie}>
                                     <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={280}>
                                         <PieChart>
                                             <Pie
@@ -190,17 +192,17 @@ const Statistics = ({ id }) => {
                                         </PieChart>
                                     </ResponsiveContainer>
                                 </div>
-                                <div className="text-center">
-                                    <p className="text-4xl md:text-5xl font-bold text-indigo-600 mb-2">71%</p>
-                                    <p className="text-sm md:text-base text-gray-600">of individuals with tubulinopathy experience seizures</p>
+                                <div style={{ textAlign: 'center' }}>
+                                    <p className={classes.percentage}>71%</p>
+                                    <p className={classes.percentageText}>of individuals with tubulinopathy experience seizures</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Age of Onset */}
-                        <div className="bg-white p-4 md:p-8 rounded-xl shadow-lg">
-                            <h4 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 text-gray-800 text-center">Age of Seizure Onset</h4>
-                            <div className="h-64 w-full min-w-0 min-h-[256px]">
+                        <div className={classes.chartCard}>
+                            <h4 className={classes.chartTitle}>Age of Seizure Onset</h4>
+                            <div className={classes.chartContainerSmall}>
                                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={256}>
                                     <BarChart 
                                         data={seizureOnsetAge}
@@ -223,11 +225,11 @@ const Statistics = ({ id }) => {
                                     </BarChart>
                                 </ResponsiveContainer>
                             </div>
-                            <div className="mt-4 space-y-2">
-                                <p className="text-sm font-semibold text-gray-700">Key Findings:</p>
-                                <ul className="text-xs md:text-sm text-gray-600 space-y-1 ml-4 list-disc">
-                                    <li><strong>63%</strong> of seizures begin in the first year of life</li>
-                                    <li><strong>85%</strong> of seizures begin before age 3</li>
+                            <div className={classes.findings}>
+                                <p className={classes.findingsTitle}>Key Findings:</p>
+                                <ul className={classes.findingsList}>
+                                    <li className={classes.findingsListItem}><strong className={classes.strong}>63%</strong> of seizures begin in the first year of life</li>
+                                    <li className={classes.findingsListItem}><strong className={classes.strong}>85%</strong> of seizures begin before age 3</li>
                                 </ul>
                             </div>
                         </div>

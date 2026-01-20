@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
+import { useCurrentResearchStyles } from '../styles/currentResearchStyles';
 
 const CurrentResearch = ({ id }) => {
+    const classes = useCurrentResearchStyles();
     const [expandedIndex, setExpandedIndex] = useState(null);
 
     const researchAreas = [
@@ -72,45 +74,45 @@ const CurrentResearch = ({ id }) => {
     };
 
     return (
-        <section id={id} className="py-12 md:py-20 px-4 md:px-6 bg-gray-50">
-            <div className="max-w-4xl mx-auto">
-                <div className="text-center mb-8 md:mb-12">
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">Current Research Directions</h2>
-                    <p className="text-sm md:text-base text-gray-600 max-w-2xl mx-auto px-2">
+        <section id={id} className={classes.section}>
+            <div className={classes.container}>
+                <div className={classes.header}>
+                    <h2 className={classes.title}>Current Research Directions</h2>
+                    <p className={classes.subtitle}>
                         Ongoing research is expanding our understanding of tubulinopathies, from basic mechanisms to clinical applications.
                     </p>
                 </div>
 
-                <div className="space-y-3">
+                <div className={classes.list}>
                     {researchAreas.map((area, index) => (
-                        <div key={index} className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                        <div key={index} className={classes.card}>
                             <button
                                 onClick={() => toggleExpanded(index)}
-                                className="w-full px-4 md:px-6 py-3 md:py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                                className={classes.button}
                             >
-                                <h3 className="text-base md:text-lg font-bold text-gray-900 pr-4 break-words">{area.title}</h3>
+                                <h3 className={classes.buttonTitle}>{area.title}</h3>
                                 {expandedIndex === index ? (
-                                    <ChevronUp className="w-5 h-5 text-medical-blue shrink-0" />
+                                    <ChevronUp className={classes.icon} />
                                 ) : (
-                                    <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />
+                                    <ChevronDown className={classes.iconCollapsed} />
                                 )}
                             </button>
                             {expandedIndex === index && (
-                                <div className="px-4 md:px-6 pb-4 md:pb-6 pt-2 border-t border-gray-100">
-                                    <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-3 md:mb-4">{area.description}</p>
+                                <div className={classes.content}>
+                                    <p className={classes.description}>{area.description}</p>
                                     {area.links && area.links.length > 0 && (
-                                        <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-100">
-                                            <h4 className="text-xs md:text-sm font-semibold text-gray-700 mb-2">Research Links:</h4>
-                                            <ul className="space-y-2">
+                                        <div className={classes.linksSection}>
+                                            <h4 className={classes.linksTitle}>Research Links:</h4>
+                                            <ul className={classes.linksList}>
                                                 {area.links.map((link, linkIndex) => (
                                                     <li key={linkIndex}>
                                                         <a
                                                             href={link.url}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
-                                                            className="text-medical-blue hover:text-blue-700 hover:underline flex items-center gap-2 text-xs md:text-sm break-words"
+                                                            className={classes.link}
                                                         >
-                                                            <ExternalLink className="w-3 h-3 md:w-4 md:h-4 shrink-0" />
+                                                            <ExternalLink className={classes.linkIcon} />
                                                             <span>{link.text}</span>
                                                         </a>
                                                     </li>

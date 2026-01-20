@@ -1,4 +1,5 @@
 import './globals.css'
+import JssProvider from '../styles/JssProvider'
 
 export const metadata = {
   title: 'Understanding Tubulinopathy | Tubulinopathy Awareness',
@@ -45,7 +46,9 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <JssProvider>{children}</JssProvider>
+      </body>
     </html>
   )
 }
