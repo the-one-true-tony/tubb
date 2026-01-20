@@ -1,3 +1,6 @@
 import { defineCloudflareConfig } from '@opennextjs/cloudflare';
 
-export default defineCloudflareConfig();
+export default defineCloudflareConfig({
+  // Default configuration for Cloudflare Pages
+  // OpenNext will handle Next.js 15 transformation automatically
+});
