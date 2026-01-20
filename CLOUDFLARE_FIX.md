@@ -17,7 +17,11 @@ The `package.json` build script now removes cache after build:
 
 This prevents Cloudflare from trying to upload large cache files.
 
-### Step 2: Configure Cloudflare Dashboard
+### Step 2: Remove Old Vite Files (Already Done)
+
+The old `index.html` file from the Vite setup has been removed. This file was causing MIME type errors because it referenced `/src/main.jsx` which doesn't exist in Next.js.
+
+### Step 3: Configure Cloudflare Dashboard
 
 1. Go to **Workers & Pages → Your Project → Settings → Builds & deployments**
 
@@ -28,6 +32,19 @@ This prevents Cloudflare from trying to upload large cache files.
    - **Node version**: `25`
 
 3. **Save and redeploy**
+
+### Step 4: Purge Cloudflare Cache (If MIME Type Errors Persist)
+
+If you're seeing MIME type errors like "Expected a JavaScript module script but the server responded with a MIME type of 'text/jsx'", you need to purge Cloudflare's cache:
+
+1. Go to **Workers & Pages → Your Project → Settings → Builds & deployments**
+2. Scroll down to **Cache Management**
+3. Click **Purge Everything** or **Purge by URL** for specific assets
+4. Wait a few minutes for cache to clear
+5. Refresh your site
+
+Alternatively, you can purge cache from the Cloudflare Dashboard:
+- Go to **Caching → Configuration → Purge Everything**
 
 ### Why This Works
 

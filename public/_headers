@@ -1,0 +1,18 @@
+# Cloudflare Pages Headers Configuration
+# Ensure JavaScript files are served with correct MIME type
+
+/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/*.mjs
+  Content-Type: application/javascript; charset=utf-8
+
+/*.jsx
+  Content-Type: application/javascript; charset=utf-8
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/_next/static/chunks/*
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: public, max-age=31536000, immutable

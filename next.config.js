@@ -6,6 +6,9 @@ const nextConfig = {
   // Cloudflare Pages supports Next.js natively
   // API routes automatically run on Edge Runtime
   
+  // Ensure proper asset handling
+  assetPrefix: undefined,
+  
   // GitHub Pages configuration (static export)
   // Uncomment the line below to enable static export for GitHub Pages
   // Note: This will disable API routes and server-side features
