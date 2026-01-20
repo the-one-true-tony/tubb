@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf .next/cache",
-    "build:cloudflare": "npm run build && npx opennextjs-cloudflare build --skipNextBuild",
+    "build": "next build",
+    "build:cloudflare": "npm run build && npx @opennextjs/cloudflare build --skipNextBuild",
     "preview": "npx wrangler dev",
     "start": "next start",
     "lint": "next lint"

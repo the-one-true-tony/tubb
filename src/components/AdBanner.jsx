@@ -16,33 +16,49 @@ const AdBanner = ({
   const classes = useAdBannerStyles();
 
   useEffect(() => {
-    try {
-      if (!adSlot) {
-        return; // Don't initialize if ad slot not set
-      }
+    if (!adSlot || adSlot.startsWith('YOUR_')) {
+      return; // Don't initialize if ad slot not set or is placeholder
+    }
 
-      // Wait for adsbygoogle to be available
-      const initAd = () => {
+    let retryCount = 0;
+    const maxRetries = 50; // 5 seconds max wait time (50 * 100ms)
+    let timeoutId = null;
+
+    const initAd = () => {
+      try {
+        // Check if AdSense script is loaded and element exists
         if (window.adsbygoogle && adRef.current) {
           try {
+            // Initialize the ad
             (window.adsbygoogle = window.adsbygoogle || []).push({});
           } catch (err) {
             console.error('AdSense push error:', err);
           }
+        } else if (retryCount < maxRetries) {
+          // Retry if not ready, but limit retries
+          retryCount++;
+          timeoutId = setTimeout(initAd, 100);
         } else {
-          // Retry if not ready
-          setTimeout(initAd, 100);
+          console.warn('AdSense script not loaded after maximum retries');
         }
-      };
+      } catch (err) {
+        console.error('AdSense initialization error:', err);
+      }
+    };
 
-      initAd();
-    } catch (err) {
-      console.error('AdSense error:', err);
-    }
+    // Start initialization
+    initAd();
+
+    // Cleanup function to clear timeout if component unmounts
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [adSlot, publisherId]);
 
-  if (!adSlot) {
-    return null;
+  if (!adSlot || adSlot.startsWith('YOUR_')) {
+    return null; // Don't render placeholder ad slots
   }
 
   const containerClass = className.includes('bg-gray-50') 
