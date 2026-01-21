@@ -1,9 +1,11 @@
 name = "tubb"
-pages_build_output_dir = ".open-next/assets"
+main = ".open-next/worker.js"
 compatibility_date = "2026-01-20"
 compatibility_flags = [
   "nodejs_compat"
 ]
 
-[vars]
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"[vars]
 NEXTJS_ENV = "production"
