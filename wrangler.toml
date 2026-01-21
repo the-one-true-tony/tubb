@@ -7,5 +7,7 @@ compatibility_flags = [
 
 [assets]
 directory = ".open-next/assets"
-binding = "ASSETS"[vars]
+binding = "ASSETS"
+
+[vars]
 NEXTJS_ENV = "production"
