@@ -77,7 +77,12 @@ export async function GET(request) {
     // For now, it's public but only returns users who opted in to be contactable
     // and have shared their location
     
-    // Get environment from Cloudflare context
+    // Optional: Require API key for external access
+    // const apiKey = request.headers.get('x-api-key');
+    // if (apiKey !== process.env.API_KEY) {
+    //   return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    // }
+
     let env;
     try {
       ({ env } = getCloudflareContext());
@@ -87,12 +92,6 @@ export async function GET(request) {
         { status: 500 },
       );
     }
-
-    // Optional: Require API key for external access
-    // const apiKey = request.headers.get('x-api-key');
-    // if (apiKey !== env.API_KEY) {
-    //   return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
 
     const db = env.DB;
 
@@ -208,18 +207,6 @@ export async function POST(request) {
     const sanitizedAddress = address.trim();
     const sanitizedBirthdate = birthdate ? birthdate.trim() : null;
     const sanitizedVariant = tubulin_variant ? tubulin_variant.trim() : null;
-
-    let env;
-    try {
-      // In Cloudflare / wrangler dev, this gives us the bindings (including DB)
-      ({ env } = getCloudflareContext());
-    } catch {
-      // In `next dev` (Node), this will fail – explicit error so the UI shows a message.
-      return Response.json(
-        { error: 'Database is not available in this environment.' },
-        { status: 500 },
-      );
-    }
 
     const db = env.DB;
 
