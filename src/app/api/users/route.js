@@ -144,28 +144,12 @@ export async function POST(request) {
       );
     }
 
-    // Optional API key authentication for programmatic access (e.g., n8n)
-    // If API key is provided and valid, skip rate limiting
-    // If no API key, rely on Cloudflare rate limiting
-    const apiKey = request.headers.get('x-api-key');
-    const validApiKey = env.USERS_API_KEY;
-    
-    if (validApiKey && apiKey !== validApiKey) {
-      // API key was expected but not provided or invalid
+    // Check rate limiting (rely on Cloudflare rate limiting)
+    if (!checkRateLimit(request)) {
       return Response.json(
-        { error: 'Unauthorized. API key required.' },
-        { status: 401 },
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 },
       );
-    }
-    
-    // Check rate limiting (only if no valid API key)
-    if (!apiKey || apiKey !== validApiKey) {
-      if (!checkRateLimit(request)) {
-        return Response.json(
-          { error: 'Too many requests. Please try again later.' },
-          { status: 429 },
-        );
-      }
     }
 
     const body = await request.json();

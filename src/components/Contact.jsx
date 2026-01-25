@@ -313,7 +313,7 @@ const Contact = ({ id }) => {
             )} */}
             {/* Google Places script for address autocomplete */}
             <Script
-                src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places`}
+                src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY || ''}&libraries=places`}
                 strategy="afterInteractive"
                 onLoad={() => {
                     if (typeof window !== 'undefined' && window.__initTubbPlaces) {
