@@ -232,7 +232,6 @@ const useFbGroupPageStyles = createUseStyles({
 });
 
 const PASSWORD_STORAGE_KEY = 'fb_group_authenticated';
-const CORRECT_PASSWORD = process.env.NEXT_PUBLIC_FB_GROUP_PASSWORD || 'tubulinopathy2024';
 
 export default function FbGroupPage() {
   const classes = usePageStyles();
@@ -418,17 +417,30 @@ export default function FbGroupPage() {
     }
   }, [isAuthenticated, mapLoaded, users, userLocation]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    if (password === CORRECT_PASSWORD) {
-      setIsAuthenticated(true);
-      if (typeof window !== 'undefined') {
-        localStorage.setItem(PASSWORD_STORAGE_KEY, 'true');
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      const data = await res.json();
+
+      if (data.valid) {
+        setIsAuthenticated(true);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(PASSWORD_STORAGE_KEY, 'true');
+        }
+      } else {
+        setError('Incorrect password. Please try again.');
+        setPassword('');
       }
-    } else {
-      setError('Incorrect password. Please try again.');
+    } catch (err) {
+      setError('Failed to verify password. Please try again.');
       setPassword('');
     }
   };
