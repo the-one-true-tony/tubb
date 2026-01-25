@@ -7,6 +7,14 @@ compatibility_flags = ["nodejs_compat"]
 directory = ".open-next/assets"
 binding = "ASSETS"
 
+[vars]
+# Environment variables for Cloudflare Pages
+# NOTE: For production, these should be set in Cloudflare Dashboard instead
+# Dashboard: Workers & Pages → tubb → Settings → Environment Variables
+NEXTJS_ENV = "production"
+NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = "AIzaSyAf-zHMPUZ3_2fLpw_8qNNd8KfYmKCjENw"
+NEXT_PUBLIC_FB_GROUP_PASSWORD = "tubbfamily"
+
 [[d1_databases]]
 binding = "DB"
 database_name = "tubb-db"
