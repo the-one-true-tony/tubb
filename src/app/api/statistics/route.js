@@ -1,23 +1,23 @@
 // Example statistics API route - GET /api/statistics
-// This could fetch dynamic statistics from a database
+// Currently returns static data; can be wired to D1 later if needed.
 
 export async function GET(_request) {
-  // In a real application, you would fetch this from a database
   const statistics = {
     prevalence: {
       value: '1 in 100,000',
-      description: 'Estimated prevalence of tubulinopathies'
+      description: 'Estimated prevalence of tubulinopathies',
     },
     cases: {
       value: '~500',
-      description: 'Documented cases worldwide'
+      description: 'Documented cases worldwide',
     },
     genes: {
       value: '10+',
-      description: 'Known tubulin genes associated with disorders'
+      description: 'Known tubulin genes associated with disorders',
     },
-    lastUpdated: new Date().toISOString()
-  }
+    lastUpdated: new Date().toISOString(),
+  };
 
-  return Response.json(statistics)
+  return Response.json(statistics);
 }
+

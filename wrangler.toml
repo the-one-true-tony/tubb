@@ -9,3 +9,8 @@ binding = "ASSETS"
 
 [vars]
 NEXTJS_ENV = "production"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tubb-db"
+database_id = "c23e3cbe-6c51-4e82-b23b-7ed7ecb96029"

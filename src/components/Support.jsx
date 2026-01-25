@@ -80,6 +80,18 @@ const Support = ({ id }) => {
                         <h3 className={classes.cardTitle}>Support Organizations & Resources</h3>
                         <div className={classes.subsection}>
                             <div>
+                                <h4 className={classes.subsectionTitle}>Tubulinopathy Facebook Support Group</h4>
+                                <p className={classes.paragraph} style={{ marginBottom: '0.5rem' }}>
+                                    Join our Facebook support group to connect with families, caregivers, and individuals affected by tubulinopathies. This private community provides a safe space to share experiences, ask questions, exchange treatment tips, and find emotional support from others who understand the journey.
+                                </p>
+                                <a href="https://www.facebook.com/groups/1471560199598163" target="_blank" rel="noopener noreferrer" className={classes.linkWithIcon}>
+                                    Join the Facebook Group →
+                                </a>
+                                <p className={classes.italic}>
+                                    Note: This is a private group. You may need to answer a few questions to join, which helps maintain a safe and supportive environment for all members.
+                                </p>
+                            </div>
+                            <div>
                                 <h4 className={classes.subsectionTitle}>Tubulin Biobank</h4>
                                 <p className={classes.paragraph} style={{ marginBottom: '0.5rem' }}>
                                     An international initiative collecting samples and clinical data from individuals with tubulinopathies to enable research and improve diagnostics.
@@ -92,18 +104,6 @@ const Support = ({ id }) => {
                                 <h4 className={classes.subsectionTitle}>Patient Registries & Research</h4>
                                 <p className={classes.paragraph} style={{ marginBottom: 0 }}>
                                     Clinical trials, natural history studies, and biobanks are actively recruiting participants. Contributing to research helps improve understanding of disease progression, outcomes, and potential future therapies.
-                                </p>
-                            </div>
-                            <div>
-                                <h4 className={classes.subsectionTitle}>Tubulinopathy Facebook Support Group</h4>
-                                <p className={classes.paragraph} style={{ marginBottom: '0.5rem' }}>
-                                    Join our Facebook support group to connect with families, caregivers, and individuals affected by tubulinopathies. This private community provides a safe space to share experiences, ask questions, exchange treatment tips, and find emotional support from others who understand the journey.
-                                </p>
-                                <a href="https://www.facebook.com/groups/1471560199598163" target="_blank" rel="noopener noreferrer" className={classes.linkWithIcon}>
-                                    Join the Facebook Group →
-                                </a>
-                                <p className={classes.italic}>
-                                    Note: This is a private group. You may need to answer a few questions to join, which helps maintain a safe and supportive environment for all members.
                                 </p>
                             </div>
                             <div>

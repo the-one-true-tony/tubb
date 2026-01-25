@@ -17,27 +17,27 @@ export default function Home() {
   const classes = usePageStyles();
   
   return (
-    <div className={classes.container}>
-      <nav className={classes.nav}>
-        <div className={classes.navContent}>
-          <a href="#home" className={classes.logo}>
+    <div className={`page-container ${classes.container}`}>
+      <nav className={`page-nav ${classes.nav}`}>
+        <div className={`page-nav-content ${classes.navContent}`}>
+          <a href="#home" className={`page-logo ${classes.logo}`}>
             Tubulinopathy Awareness
           </a>
-          <div className={classes.navLinks}>
-            <a href="#causes" className={classes.navLink}>Causes</a>
-            <a href="#variants" className={classes.navLink}>Variants</a>
-            <a href="#expressions" className={classes.navLink}>Symptoms</a>
-            <a href="#diagnosis" className={classes.navLink}>Diagnosis</a>
-            <a href="#statistics" className={classes.navLink}>Statistics</a>
-            <a href="#support" className={classes.navLink}>Support</a>
-            <a href="#research" className={classes.navLink}>Research</a>
-            <a href="#contact" className={classes.navLink}>Contact</a>
-            <a href="#sources" className={classes.navLink}>Sources</a>
+          <div className={`page-nav-links ${classes.navLinks}`}>
+            <a href="#causes" className={`page-nav-link ${classes.navLink}`}>Causes</a>
+            <a href="#variants" className={`page-nav-link ${classes.navLink}`}>Variants</a>
+            <a href="#expressions" className={`page-nav-link ${classes.navLink}`}>Symptoms</a>
+            <a href="#diagnosis" className={`page-nav-link ${classes.navLink}`}>Diagnosis</a>
+            <a href="#statistics" className={`page-nav-link ${classes.navLink}`}>Statistics</a>
+            <a href="#support" className={`page-nav-link ${classes.navLink}`}>Support</a>
+            <a href="#research" className={`page-nav-link ${classes.navLink}`}>Research</a>
+            <a href="#contact" className={`page-nav-link ${classes.navLink}`}>Contact</a>
+            <a href="#sources" className={`page-nav-link ${classes.navLink}`}>Sources</a>
           </div>
         </div>
       </nav>
 
-      <main className={classes.main}>
+      <main className={`page-main ${classes.main}`}>
         <Hero id="home" />
         
         {/* Ad placement after hero */}
@@ -78,9 +78,9 @@ export default function Home() {
         <Sources id="sources" />
       </main>
 
-      <footer className={classes.footer}>
+      <footer className={`page-footer ${classes.footer}`}>
         <p>&copy; {new Date().getFullYear()} Tubulinopathy Awareness Project</p>
-        <p className={classes.footerText}>
+        <p className={`page-footer-text ${classes.footerText}`}>
           Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
         </p>
       </footer>
