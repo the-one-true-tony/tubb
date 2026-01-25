@@ -85,7 +85,8 @@ export async function GET(request) {
 
     let env;
     try {
-      ({ env } = getCloudflareContext());
+      const context = getCloudflareContext();
+      env = context.env;
     } catch {
       return Response.json(
         { error: 'Database is not available in this environment.' },
@@ -136,7 +137,8 @@ export async function POST(request) {
     // Get environment from Cloudflare context
     let env;
     try {
-      ({ env } = getCloudflareContext());
+      const context = getCloudflareContext();
+      env = context.env;
     } catch {
       return Response.json(
         { error: 'Database is not available in this environment.' },
