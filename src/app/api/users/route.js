@@ -211,6 +211,19 @@ export async function POST(request) {
 
     const db = env.DB;
 
+    // Check if email already exists (case-insensitive check)
+    const existingUser = await db.prepare(
+      `SELECT id FROM users WHERE LOWER(email) = LOWER(?1)`
+    ).bind(sanitizedEmail).first();
+
+    if (existingUser) {
+      return Response.json(
+        { error: 'An account with this email already exists.' },
+        { status: 409 },
+      );
+    }
+
+    // Insert new user
     const stmt = db.prepare(
       `INSERT INTO users (
         name,
@@ -245,9 +258,8 @@ export async function POST(request) {
   } catch (err) {
     console.error('Error inserting user:', err);
     
-    // Don't expose database errors to client
-    // Check for unique constraint violation (duplicate email)
-    if (err.message && err.message.includes('UNIQUE constraint')) {
+    // Fallback: Check for unique constraint violation (in case check above missed it)
+    if (err.message && (err.message.includes('UNIQUE constraint') || err.message.includes('UNIQUE'))) {
       return Response.json(
         { error: 'An account with this email already exists.' },
         { status: 409 },

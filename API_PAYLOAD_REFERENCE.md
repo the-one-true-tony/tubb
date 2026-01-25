@@ -88,12 +88,14 @@
 }
 ```
 
-**409 Conflict** - Duplicate email
+**409 Conflict** - Duplicate email (email already exists in database)
 ```json
 {
   "error": "An account with this email already exists."
 }
 ```
+
+**Note:** Email uniqueness is enforced at the database level. The API checks for duplicates before inserting and returns a 409 status if the email already exists. Email matching is case-insensitive (e.g., "John@Example.com" and "john@example.com" are considered the same).
 
 **429 Too Many Requests** - Rate limit exceeded
 ```json

@@ -7,9 +7,6 @@ compatibility_flags = ["nodejs_compat"]
 directory = ".open-next/assets"
 binding = "ASSETS"
 
-[vars]
-NEXTJS_ENV = "production"
-
 [[d1_databases]]
 binding = "DB"
 database_name = "tubb-db"
