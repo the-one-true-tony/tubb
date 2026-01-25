@@ -77,12 +77,7 @@ export async function GET(request) {
     // For now, it's public but only returns users who opted in to be contactable
     // and have shared their location
     
-    // Optional: Require API key for external access
-    // const apiKey = request.headers.get('x-api-key');
-    // if (apiKey !== process.env.API_KEY) {
-    //   return Response.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
-
+    // Get environment from Cloudflare context
     let env;
     try {
       ({ env } = getCloudflareContext());
@@ -92,6 +87,12 @@ export async function GET(request) {
         { status: 500 },
       );
     }
+
+    // Optional: Require API key for external access
+    // const apiKey = request.headers.get('x-api-key');
+    // if (apiKey !== env.API_KEY) {
+    //   return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    // }
 
     const db = env.DB;
 
@@ -133,11 +134,22 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    // Get environment from Cloudflare context
+    let env;
+    try {
+      ({ env } = getCloudflareContext());
+    } catch {
+      return Response.json(
+        { error: 'Database is not available in this environment.' },
+        { status: 500 },
+      );
+    }
+
     // Optional API key authentication for programmatic access (e.g., n8n)
     // If API key is provided and valid, skip rate limiting
     // If no API key, rely on Cloudflare rate limiting
     const apiKey = request.headers.get('x-api-key');
-    const validApiKey = process.env.USERS_API_KEY;
+    const validApiKey = env.USERS_API_KEY;
     
     if (validApiKey && apiKey !== validApiKey) {
       // API key was expected but not provided or invalid

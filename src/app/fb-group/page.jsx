@@ -246,6 +246,7 @@ export default function FbGroupPage() {
   const [users, setUsers] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const mapInstanceRef = useRef(null);
+  const [googleApiKey, setGoogleApiKey] = useState('');
 
   useEffect(() => {
     // Mark component as mounted to prevent hydration mismatch
@@ -257,6 +258,20 @@ export default function FbGroupPage() {
       setIsAuthenticated(authenticated);
       setIsLoading(false);
     }
+
+    // Fetch configuration (Google Maps API key)
+    async function fetchConfig() {
+      try {
+        const response = await fetch('/api/config');
+        if (response.ok) {
+          const data = await response.json();
+          setGoogleApiKey(data.googlePlacesApiKey || '');
+        }
+      } catch (err) {
+        console.error('Error fetching config:', err);
+      }
+    }
+    fetchConfig();
   }, []);
 
   // Get user's current location
@@ -551,9 +566,9 @@ export default function FbGroupPage() {
         </section>
       </main>
       {/* Google Maps script */}
-      {isAuthenticated && (
+      {isAuthenticated && googleApiKey && (
         <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`}
+          src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}`}
           strategy="afterInteractive"
           onLoad={() => {
             setMapLoaded(true);

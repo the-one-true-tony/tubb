@@ -143,15 +143,24 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export async function POST(request) {
   try {
+    // Get environment from Cloudflare context
+    let env;
+    try {
+      ({ env } = getCloudflareContext());
+    } catch {
+      return Response.json(
+        { error: 'Database is not available in this environment.' },
+        { status: 500 },
+      );
+    }
+
     // Add authentication here!
     const authHeader = request.headers.get('authorization');
-    if (authHeader !== `Bearer ${process.env.D1_API_KEY}`) {
+    if (authHeader !== `Bearer ${env.D1_API_KEY}`) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { query, params = [] } = await request.json();
-    
-    let env;
     try {
       ({ env } = getCloudflareContext());
     } catch {
@@ -331,12 +340,15 @@ Since your Next.js app already uses Google Places Autocomplete (in Contact.jsx),
 **Example API Route:**
 ```javascript
 // src/app/api/geocode/route.js
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+
 export async function GET(request) {
+  const { env } = getCloudflareContext();
   const { searchParams } = new URL(request.url);
   const address = searchParams.get('address');
   
   const response = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`
+    `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}`
   );
   
   const data = await response.json();

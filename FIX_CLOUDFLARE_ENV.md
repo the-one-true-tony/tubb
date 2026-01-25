@@ -93,7 +93,9 @@ NEXT_PUBLIC_FB_GROUP_PASSWORD = "your-password-here"
 
 5. **Verify in code** - Add temporary logging:
    ```javascript
-   console.log('Password:', process.env.NEXT_PUBLIC_FB_GROUP_PASSWORD ? 'SET' : 'NOT SET');
+   import { getCloudflareContext } from '@opennextjs/cloudflare';
+   const { env } = getCloudflareContext();
+   console.log('Password:', env.FB_GROUP_PASSWORD ? 'SET' : 'NOT SET');
    ```
 
 ### Still Not Working?

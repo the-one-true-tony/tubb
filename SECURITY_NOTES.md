@@ -47,8 +47,11 @@ Add API key requirement for programmatic access:
 
 ```javascript
 // In POST handler
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+
+const { env } = getCloudflareContext();
 const apiKey = request.headers.get('x-api-key');
-if (apiKey !== process.env.USERS_API_KEY) {
+if (apiKey !== env.USERS_API_KEY) {
   return Response.json({ error: 'Unauthorized' }, { status: 401 });
 }
 ```
@@ -59,9 +62,12 @@ If the form is public-facing, add reCAPTCHA:
 
 ```javascript
 // Verify reCAPTCHA token
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+
+const { env } = getCloudflareContext();
 const captchaToken = body.captchaToken;
 const captchaResponse = await fetch(
-  `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${captchaToken}`
+  `https://www.google.com/recaptcha/api/siteverify?secret=${env.RECAPTCHA_SECRET}&response=${captchaToken}`
 );
 const captchaData = await captchaResponse.json();
 if (!captchaData.success) {

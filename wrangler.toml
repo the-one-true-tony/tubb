@@ -12,7 +12,6 @@ binding = "ASSETS"
 # NOTE: For production, these should be set in Cloudflare Dashboard instead
 # Dashboard: Workers & Pages → tubb → Settings → Environment Variables
 NEXTJS_ENV = "production"
-NEXT_PUBLIC_GOOGLE_PLACES_API_KEY = "AIzaSyAf-zHMPUZ3_2fLpw_8qNNd8KfYmKCjENw"
 # Password for fb-group page (server-side only, not exposed to client)
 FB_GROUP_PASSWORD = "tubbfamily"
 

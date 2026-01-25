@@ -21,14 +21,8 @@ export async function POST(request) {
     try {
       ({ env } = getCloudflareContext());
     } catch {
-      // Fallback: try to get from process.env (for local dev)
-      const correctPassword = process.env.NEXT_PUBLIC_FB_GROUP_PASSWORD || process.env.FB_GROUP_PASSWORD;
-      
-      if (password === correctPassword) {
-        return Response.json({ valid: true });
-      } else {
-        return Response.json({ valid: false });
-      }
+      // Fallback for local dev - use empty object
+      env = {};
     }
 
     // Get password from Cloudflare environment

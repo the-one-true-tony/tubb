@@ -25,6 +25,7 @@ const Contact = ({ id }) => {
     const [submitting, setSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
     const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [googleApiKey, setGoogleApiKey] = useState('');
 
     const handleChange = (field) => (e) => {
         const value =
@@ -73,6 +74,22 @@ const Contact = ({ id }) => {
             setSubmitting(false);
         }
     };
+
+    // Fetch configuration (Google Maps API key)
+    useEffect(() => {
+        async function fetchConfig() {
+            try {
+                const response = await fetch('/api/config');
+                if (response.ok) {
+                    const data = await response.json();
+                    setGoogleApiKey(data.googlePlacesApiKey || '');
+                }
+            } catch (err) {
+                console.error('Error fetching config:', err);
+            }
+        }
+        fetchConfig();
+    }, []);
 
     // Initialize Google Places Autocomplete for the address field
     useEffect(() => {
@@ -312,15 +329,17 @@ const Contact = ({ id }) => {
                 </div>
             )} */}
             {/* Google Places script for address autocomplete */}
-            <Script
-                src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY}&libraries=places`}
-                strategy="afterInteractive"
-                onLoad={() => {
-                    if (typeof window !== 'undefined' && window.__initTubbPlaces) {
-                        window.__initTubbPlaces();
-                    }
-                }}
-            />
+            {googleApiKey && (
+                <Script
+                    src={`https://maps.googleapis.com/maps/api/js?key=${googleApiKey}&libraries=places`}
+                    strategy="afterInteractive"
+                    onLoad={() => {
+                        if (typeof window !== 'undefined' && window.__initTubbPlaces) {
+                            window.__initTubbPlaces();
+                        }
+                    }}
+                />
+            )}
         </section>
     );
 };
